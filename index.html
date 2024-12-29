@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year Countdown</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #2e3a59, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 2em; /* Adjusted for smaller screens */
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 10px #00f, 0 0 20px #00f, 0 0 30px #00f, 0 0 40px #3498db, 0 0 70px #3498db;
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1:hover {
+      text-shadow: 0 0 20px #00f, 0 0 40px #00f, 0 0 60px #1abc9c, 0 0 100px #1abc9c, 0 0 140px #1abc9c;
+    }
+
+    .countdown-container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px; /* Adjusted for mobile */
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin-top: 10px;
+      width: 90%; /* Ensure it fits smaller screens */
+      max-width: 500px; /* Limit width on larger screens */
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px; /* Reduced gap for mobile */
+      font-size: 1.2em; /* Adjusted font size */
+    }
+
+    .time {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px; /* Adjusted padding */
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .time span {
+      display: block;
+      font-size: 0.7em;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap; /* Ensure images stack on smaller screens */
+    }
+
+    .images img {
+      width: 80px; /* Adjusted size for mobile */
+      height: 80px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .images img:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Media Queries for Larger Screens */
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3em;
+      }
+
+      .countdown {
+        gap: 20px;
+        font-size: 2em;
+      }
+
+      .time {
+        padding: 15px;
+      }
+
+      .images img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .countdown-container {
+        padding: 30px;
+      }
+
+      .images img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>New Year Countdown</h1>
+
+  <div class="countdown-container">
+    <div class="countdown">
+      <div class="time">
+        <div id="days">0</div>
+        <span>Days</span>
+      </div>
+      <div class="time">
+        <div id="hours">0</div>
+        <span>Hours</span>
+      </div>
+      <div class="time">
+        <div id="minutes">0</div>
+        <span>Minutes</span>
+      </div>
+      <div class="time">
+        <div id="seconds">0</div>
+        <span>Seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="images">
+    <img src="https://images.pexels.com/photos/3171820/pexels-photo-3171820.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Celebration Icon">
+    <img src="https://images.pexels.com/photos/399610/pexels-photo-399610.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fireworks Icon">
+    <img src="https://images.pexels.com/photos/6027785/pexels-photo-6027785.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Party Icon">
+  </div>
+
+  <script>
+    const targetDate = new Date("December 31, 2024 23:59:59").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeRemaining = targetDate - now;
+
+      if (timeRemaining <= 0) {
+        document.querySelector(".countdown-container").innerHTML = "<h2>Happy New Year! 🎉</h2>";
+        return;
+      }
+
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
